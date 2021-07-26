@@ -12,6 +12,10 @@ MAX_LIMIT = 90
     @balance += amount
   end
 
+  def deduct(value)
+    @balance -= value
+  end
+  
   private
   def full?
     @balance >= MAX_LIMIT

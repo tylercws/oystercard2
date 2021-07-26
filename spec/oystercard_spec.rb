@@ -16,4 +16,10 @@ describe Oystercard do
     expect{ subject.top_up 1 }.to raise_error "Reached max limit of £90"
   end
 
+  it 'should deduct spending' do
+    max_limit = Oystercard::MAX_LIMIT
+    subject.top_up(max_limit)
+    expect(subject.deduct 10).to eq(80)
+  end 
+
 end
