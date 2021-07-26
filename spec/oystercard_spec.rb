@@ -11,8 +11,9 @@ describe Oystercard do
   end
 
   it "should throw error if =>£90" do
-    allow(subject).to receive(:full?).and_return true
-    expect{subject.top_up(91)}.to raise_error("Reached max limit of £90")
+    max_limit = Oystercard::MAX_LIMIT
+    subject.top_up(max_limit)
+    expect{ subject.top_up 1 }.to raise_error "Reached max limit of £90"
   end
 
 end

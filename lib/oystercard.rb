@@ -7,7 +7,6 @@ MAX_LIMIT = 90
     @balance = balance
   end
 
-
   def top_up(amount)
     fail "Reached max limit of £90" if full?
     @balance += amount
@@ -15,7 +14,7 @@ MAX_LIMIT = 90
 
   private
   def full?
-    @balance == MAX_LIMIT
+    @balance >= MAX_LIMIT
   end
 
 end
