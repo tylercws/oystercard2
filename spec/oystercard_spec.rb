@@ -49,6 +49,11 @@ describe Oystercard do
     subject.touch_in(station)
     expect(subject.entry_station).to eq station
   end
+  Descibe Oystercard do
+    it { is_expected.to respond_to(:hash)}
+  end
+
+  end
 
 
 
