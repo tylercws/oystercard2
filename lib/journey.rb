@@ -4,7 +4,7 @@ class Journey
   end
 
   def in_journey?
-    @in_journey
+    !!(Oystercard::entry_station)
   end
 
   def touch_in
