@@ -16,12 +16,6 @@ describe Oystercard do
     expect{ subject.top_up 1 }.to raise_error "Reached max limit of £90"
   end
 
-  it 'should deduct spending' do
-    max_limit = Oystercard::MAX_LIMIT
-    subject.top_up(max_limit)
-    expect(subject.deduct 10).to eq(80)
-  end
-
   it 'is in journey' do
     expect(subject).not_to be_in_journey
   end
@@ -42,6 +36,10 @@ describe Oystercard do
   it 'checks if minimum fare when touching in' do
     oystercard = Oystercard.new
     expect{oystercard.touch_in}.to raise_error "Minumum fare of 1"
+  end
+
+  it '#deducts minimum fare when touched out' do
+    expect {subject.touch_out}.to change{subject.balance}.by(-1)
   end
 
 

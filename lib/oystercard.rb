@@ -15,10 +15,6 @@ MINIMUM_FARE = 1
     @balance += amount
   end
 
-  def deduct(value)
-    @balance -= value
-  end
-
   def touch_in
     fail "Minumum fare of 1" if underfare?
     @journey.touch_in
@@ -26,6 +22,7 @@ MINIMUM_FARE = 1
 
   def touch_out
     @journey.touch_out
+    deduct(MINIMUM_FARE)
   end
 
   def in_journey?
@@ -33,6 +30,7 @@ MINIMUM_FARE = 1
   end
 
   private
+
   def full?
     @balance >= MAX_LIMIT
   end
@@ -40,6 +38,11 @@ MINIMUM_FARE = 1
   def underfare?
     @balance < MINIMUM_FARE
   end
+
+  def deduct(value)
+    @balance -= value
+  end
+
 end
 
 oc = Oystercard.new()
