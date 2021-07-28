@@ -1,14 +1,15 @@
-require "journey"
-class Oystercard
-attr_reader :balance, :entry_station
+ class Oystercard
+ attr_reader :balance, :entry_station, :list_of_journey
 
-MAX_LIMIT = 90
-MINIMUM_FARE = 1
+
+ MAX_LIMIT = 90
+ MINIMUM_FARE = 1
 
   def initialize(balance=0)
     @balance = balance
     @in_journey = false
     @entry_station
+    @list_of_journey = {}
   end
 
   def top_up(amount)
@@ -21,15 +22,12 @@ MINIMUM_FARE = 1
     @entry_station = station
   end
 
-  def touch_out
+  def touch_out(station)
     deduct(MINIMUM_FARE)
+    @exit_station = station
+    @list_of_journey["entry_station: #{@entry_station}"] = "exit_station: #{@exit_station}"
     @entry_station = nil
   end
-
-  def in_journey?
-    !!entry_station
-  end
-
 
   private
   def full?
@@ -44,7 +42,16 @@ MINIMUM_FARE = 1
     @balance -= value
   end
 
+  public
+  def in_journey?
+    !!entry_station
+  end
 end
 
-oc = Oystercard.new()
-p oc.touch_out
+oc = Oystercard.new
+oc.top_up(10)
+oc.touch_in("Cornbrook")
+oc.touch_out("Northern Moor")
+oc.touch_in("Northern Moor")
+oc.touch_out("Firswood")
+p oc.list_of_journey

@@ -2,6 +2,8 @@ require 'oystercard'
 
 describe Oystercard do
   let(:station){ double :station }
+  let(:entry_station) { double :station }
+  let(:exit_station) { double :station }
 
   it 'should have a balance of 0' do
     oystercard = Oystercard.new
@@ -31,7 +33,7 @@ describe Oystercard do
   it 'can touch out' do
     subject.top_up(1)
     subject.touch_in(station)
-    subject.touch_out
+    subject.touch_out(station)
     expect(subject).not_to be_in_journey
   end
 
@@ -41,7 +43,7 @@ describe Oystercard do
   end
 
   it '#deducts minimum fare when touched out' do
-    expect {subject.touch_out}.to change{subject.balance}.by(-1)
+    expect {subject.touch_out(station)}.to change{subject.balance}.by(-1)
   end
 
   it 'stores the entry station' do
@@ -49,12 +51,15 @@ describe Oystercard do
     subject.touch_in(station)
     expect(subject.entry_station).to eq station
   end
-  Descibe Oystercard do
-    it { is_expected.to respond_to(:hash)}
+
+  it 'checks card has empty list of journey' do
+    subject.list_of_journey.empty?
   end
 
+  it 'stores the exit station' do
+    subject.top_up(1)
+    subject.touch_in(entry_station)
+    subject.touch_out(exit_station)
+    expect(subject.list_of_journey)
   end
-
-
-
 end
