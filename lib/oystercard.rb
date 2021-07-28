@@ -47,11 +47,3 @@
     !!entry_station
   end
 end
-
-oc = Oystercard.new
-oc.top_up(10)
-oc.touch_in("Cornbrook")
-oc.touch_out("Northern Moor")
-oc.touch_in("Northern Moor")
-oc.touch_out("Firswood")
-p oc.list_of_journey
