@@ -7,9 +7,8 @@
 
   def initialize(balance=0)
     @balance = balance
-    @in_journey = false
     @entry_station
-    @list_of_journey = {}
+    @list_of_journey = []
   end
 
   def top_up(amount)
@@ -25,7 +24,7 @@
   def touch_out(station)
     deduct(MINIMUM_FARE)
     @exit_station = station
-    @list_of_journey["entry_station: #{@entry_station}"] = "exit_station: #{@exit_station}"
+    @list_of_journey.push({entry_station: @entry_station, exit_station: @exit_station})
     @entry_station = nil
   end
 
@@ -47,3 +46,5 @@
     !!entry_station
   end
 end
+
+
