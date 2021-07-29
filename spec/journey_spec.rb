@@ -1,12 +1,20 @@
+require 'journey'
 require 'station'
 
-describe Station do
-  let(:station){Station.new("Cornbrook",1)}
-  it 'know the name' do
-    expect(station.name).to eq ("Cornbrook")
+describe Journey do
+  it 'starts a journey' do
+    expect(subject.begin_journey("Cornbrook",1)).to eq(["Cornbrook",1])
   end
 
-  it 'knows the zone' do
-    expect(station.zone).to eq (1)
+  it 'ends a journey' do
+    
+  end
+
+  it 'calculating fare' do
+    
+  end
+
+  it 'know if a journey is complete' do
+    
   end
 end
